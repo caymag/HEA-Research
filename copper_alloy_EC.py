@@ -38,7 +38,7 @@ preprocessor = ColumnTransformer(
 x_train, x_test, y_train, y_test = train_test_split(df[numerical_features + categorical_features], y, test_size=0.8, random_state=68)
 
 # Define and tune kernel for Gaussian Process
-kernel = Matern(nu=2.5, length_scale=2) + RBF(length_scale=1.0) + WhiteKernel(noise_level=1)
+kernel = RBF() + WhiteKernel()
 
 # Create a pipeline to scale and transform the features, then apply GPR
 gpr_pipeline = Pipeline(steps=[
@@ -56,8 +56,8 @@ y_pred = gpr_pipeline.predict(x_test)
 mae = mean_absolute_error(y_test, y_pred)
 rmse = np.sqrt(mean_squared_error(y_test, y_pred))
 r2 = r2_score(y_test, y_pred)
-spearman = spearmanr(y_test, y_pred)  
-tau = kendalltau(y_test, y_pred)
+spearman, _ = spearmanr(y_test, y_pred)  
+tau, _ = kendalltau(y_test, y_pred)
 
 print(f'Mean Absolute Error: {mae:.2f}')
 print(f'Root Mean Squared Error: {rmse:.2f}')
@@ -66,15 +66,15 @@ print(f'Spearman: {spearman:.2f}')
 print(f'Tau: {tau:.2f}')
 
 # Plot results
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(7, 7))
 plt.scatter(y_test, y_pred, label="Predicted Values", color='blue', edgecolors='k', alpha=0.7)
 plt.plot(y_test, y_test, color='black', linestyle='--', label='Parity Line')  # Plot parity line
-plt.xlabel("Experimental Electrical Conductivity", fontsize=14)
-plt.ylabel("Predicted Electrical Conductivity (%IACS)", fontsize=14)
-plt.title("Electrical Conductivity Prediction for Copper Alloys", fontsize=16)
+plt.xlabel("Experimental Yield Strength (YS) [MPa]", fontsize=14)
+plt.ylabel("Predicted Yield Strength (YS) [MPa]", fontsize=14)
+plt.title("Yield Strength Prediction for Copper Alloys", fontsize=16)
 plt.text(0.05, 0.80, f'MAE: {mae:.2f} MPa', transform=plt.gca().transAxes, fontsize=12)
 plt.text(0.05, 0.75, f'τ: {tau:.2f}', transform=plt.gca().transAxes, fontsize=12)
-plt.text(0.05, 0.70, f'ρ: {spearman:.2f}', transform=plt.gca().transAxes, fontsize=12)  
+plt.text(0.05, 0.70, f'ρ: {spearman:.2f}', transform=plt.gca().transAxes, fontsize=12)   
 plt.legend(fontsize=12)
 plt.tight_layout()
 plt.show()
