@@ -83,9 +83,9 @@ plt.plot(y_test, y_test, color='black', linestyle='--', label='Parity Line')  # 
 plt.xlabel("Experimental Yield Strength (YS) [MPa]", fontsize=14)
 plt.ylabel("Predicted Yield Strength (YS) [MPa]", fontsize=14)
 plt.title("Yield Strength Prediction for Copper Alloys", fontsize=16)
-plt.text(0.05, 0.80, f'MAE: {mae:.2f} MPa', transform=plt.gca().transAxes, fontsize=12)
-plt.text(0.05, 0.75, f'τ: {tau:.2f}', transform=plt.gca().transAxes, fontsize=12)
-plt.text(0.05, 0.70, f'ρ: {spearman:.2f}', transform=plt.gca().transAxes, fontsize=12)    
+plt.text(0.05, 0.85, f'MAE: {mae:.2f} MPa', transform=plt.gca().transAxes, fontsize=12)
+plt.text(0.05, 0.80, f'τ: {tau:.2f}', transform=plt.gca().transAxes, fontsize=12)
+plt.text(0.05, 0.75, f'ρ: {spearman:.2f}', transform=plt.gca().transAxes, fontsize=12)    
 
 plt.legend(fontsize=12)
 plt.tight_layout()
