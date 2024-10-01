@@ -72,7 +72,7 @@ plt.scatter(y_test, y_pred, label="Predicted Values", color='blue', edgecolors='
 plt.plot(y_test, y_test, color='black', linestyle='--', label='Parity Line')  # Plot parity line
 plt.xlabel("Experimental Hardness (HV)", fontsize=14)
 plt.ylabel("Predicted Hardness (HV)", fontsize=14)
-plt.title("Vickers Hardness Prediction for Copper Alloys", fontsize=16)
+plt.title("Vickers Hardness Prediction for Copper Alloys (0.50 LS)", fontsize=16)
 plt.text(0.05, 0.85, f'MAE: {mae:.2f} HV', transform=plt.gca().transAxes, fontsize=12)
 plt.text(0.05, 0.80, f'τ: {tau:.2f}', transform=plt.gca().transAxes, fontsize=12) 
 plt.text(0.05, 0.75, f'ρ: {spearman:.2f}', transform=plt.gca().transAxes, fontsize=12)
