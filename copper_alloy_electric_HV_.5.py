@@ -38,12 +38,12 @@ preprocessor = ColumnTransformer(
 x_train, x_test, y_train, y_test = train_test_split(df[numerical_features + categorical_features], y, test_size=0.8, random_state=68)
 
 # Define and tune kernel for Gaussian Process
-kernel = RBF() + WhiteKernel()
+kernel = RBF(length_scale=.05) + WhiteKernel()
 
 # Create a pipeline to scale and transform the features, then apply GPR
 gpr_pipeline = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('regressor', GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=10, normalize_y=True))
+    ('regressor', GaussianProcessRegressor(kernel=kernel, optimizer = None, normalize_y=True))
 ])
 
 # Fit the model
@@ -73,7 +73,7 @@ plt.plot(y_test, y_test, color='black', linestyle='--', label='Parity Line')  # 
 plt.xlabel("Experimental Hardness (HV)", fontsize=14)
 plt.ylabel("Predicted Hardness (HV)", fontsize=14)
 plt.title("Vickers Hardness Prediction for Copper Alloys", fontsize=16)
-plt.text(0.05, 0.85, f'MAE: {mae:.2f} MPa', transform=plt.gca().transAxes, fontsize=12)
+plt.text(0.05, 0.85, f'MAE: {mae:.2f} HV', transform=plt.gca().transAxes, fontsize=12)
 plt.text(0.05, 0.80, f'τ: {tau:.2f}', transform=plt.gca().transAxes, fontsize=12) 
 plt.text(0.05, 0.75, f'ρ: {spearman:.2f}', transform=plt.gca().transAxes, fontsize=12)
 plt.legend(fontsize=12)
