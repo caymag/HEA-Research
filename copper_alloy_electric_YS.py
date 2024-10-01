@@ -73,7 +73,7 @@ print(f'Tau: {tau:.2f}')
 
 # Plot results
 plt.rcParams["font.family"] = "Times New Roman"
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(7, 7))
 plt.scatter(y_test, y_pred, label="Predicted Values", color='blue', edgecolors='k', alpha=0.7)
 plt.plot(y_test, y_test, color='black', linestyle='--', label='Parity Line')  # Plot parity line
 plt.xlabel("Experimental Yield Strength (YS) [MPa]", fontsize=14)
